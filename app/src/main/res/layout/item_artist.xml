@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.zuo.client.SquareImageView
+    <com.zuo.client.widget.SquareImageView
         android:id="@+id/item_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

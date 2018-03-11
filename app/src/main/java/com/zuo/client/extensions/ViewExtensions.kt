@@ -1,4 +1,4 @@
-package com.zuo.client
+package com.zuo.client.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide

@@ -1,4 +1,4 @@
-package com.zuo.client
+package com.zuo.client.widget
 
 import android.content.Context
 import android.util.AttributeSet

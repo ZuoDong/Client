@@ -1,4 +1,4 @@
-package com.zuo.client
+package com.zuo.client.extensions
 
 import android.app.Dialog
 import android.support.v7.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.zuo.client
+package com.zuo.client.bean
 
 import com.google.gson.annotations.SerializedName
 
@@ -16,12 +16,12 @@ data class Similarartists(
 )
 
 data class Artist(
-		val name: String,
-		val mbid: String,
-		val match: String,
-		val url: String,
-		val image: List<Image>,
-		val streamable: String
+        val name: String,
+        val mbid: String,
+        val match: String,
+        val url: String,
+        val image: List<Image>,
+        val streamable: String
 )
 
 data class Image(
