@@ -8,5 +8,5 @@ interface BasePresenter{
 }
 
 interface BaseView<T>{
-     fun setPresent(present:T)
+     var presenter:T
 }

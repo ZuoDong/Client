@@ -4,37 +4,43 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
-import com.zuo.client.BuildConfig
 import com.zuo.client.R
 import com.zuo.client.adapter.ArtistsAdapter
 import com.zuo.client.bean.LastFmBean
-import com.zuo.client.httpService.LastfmService
+import com.zuo.client.contract.MainContract
+import com.zuo.client.httpService.ClientResponse
+import com.zuo.client.httpService.NetService
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.Cache
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
+
+
+    override lateinit var presenter: MainContract.Present
 
     val adapter: ArtistsAdapter by lazy { ArtistsAdapter() }
-
-    companion object {
-        val apiKey = "84eda91738849cc300c34506a6e013b5"
-        val cacheDuration:Int = 86400
-        val coldplayMbid = "cc197bad-dc9c-440d-a5b5-d52ba2e14234"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initView()
-        request()
+        requestData()
+    }
+
+    private fun requestData() {
+        NetService.requestNet({ service ->
+            service.requestSimilar(getString(R.string.coldplayMbid))
+        },object :ClientResponse<LastFmBean>{
+            override fun onSuccess(body: LastFmBean?) {
+                val artists = body?.similarartists?.artist?:return
+                progressbar.visibility = View.GONE
+                adapter.addData(artists)
+            }
+
+            override fun onFailure(t: Throwable?) {
+                progressbar.visibility = View.GONE
+            }
+
+        })
     }
 
     private fun initView() {
@@ -42,58 +48,5 @@ class MainActivity : AppCompatActivity() {
         artistsRecyclerView.layoutManager = GridLayoutManager(this,2)
 
         progressbar.visibility = View.VISIBLE
-    }
-
-    private fun request(){
-
-        val cache = Cache(cacheDir, 10 * 1024 * 1024.toLong())
-
-        val client = OkHttpClient().newBuilder()
-                .cache(cache)
-                .addInterceptor(LastFmInterceptor(apiKey, cacheDuration))
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-                })
-                .build()
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl("http://ws.audioscrobbler.com")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        val service = retrofit.create(LastfmService::class.java)
-        val requestData = service.requestSimilar(coldplayMbid)
-        requestData.enqueue(object :Callback<LastFmBean>{
-            override fun onResponse(call: Call<LastFmBean>?, response: retrofit2.Response<LastFmBean>?) {
-                println("请求成功")
-                val artists = response?.body()?.similarartists?.artist?:return
-                progressbar.visibility = View.GONE
-                adapter.addData(artists)
-            }
-
-            override fun onFailure(call: Call<LastFmBean>?, t: Throwable?) {
-                println("请求失败")
-                progressbar.visibility = View.GONE
-            }
-
-        })
-    }
-}
-
-class LastFmInterceptor(private val apiKey: String?,private val cacheDuration: Int) :Interceptor{
-    override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-        val url = request.url().newBuilder()
-                .addQueryParameter("api_key", apiKey)
-                .addQueryParameter("format", "json")
-                .build()
-
-        val newRequest = request.newBuilder()
-                .url(url)
-                .addHeader("Cache-Control", "public, max-age=$cacheDuration")
-                .build()
-
-        return chain.proceed(newRequest)
     }
 }

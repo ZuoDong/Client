@@ -39,7 +39,7 @@ class ArtistsAdapter: RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bindArtist(artist: Artist){
-            itemView.item_image.loadUrl(artist.image[1].imgurl)
+            itemView.item_image.loadUrl(artist.image[2].imgurl)
             itemView.item_name.text = artist.name
         }
     }

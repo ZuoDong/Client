@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Client</string>
+    <string name="apiKey">84eda91738849cc300c34506a6e013b5</string>
+    <string name="coldplayMbid">cc197bad-dc9c-440d-a5b5-d52ba2e14234</string>
 </resources>
