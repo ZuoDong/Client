@@ -8,5 +8,5 @@ interface BasePresenter{
 }
 
 interface BaseView<T>{
-     var presenter:T
+     val presenter:T
 }

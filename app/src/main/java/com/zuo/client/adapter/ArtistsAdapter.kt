@@ -12,12 +12,12 @@ import kotlinx.android.synthetic.main.item_artist.view.*
  * 作者：zuo
  * 时间：2018/3/8 18:00
  */
-class ArtistsAdapter: RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
+class ArtistsAdapter(val listener:OnArtistClickListener?): RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
 
     var artistorsList = ArrayList<Artist>()
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bindArtist(artistorsList[position])
+        holder?.bindArtist(artistorsList[position],position,listener)
     }
 
     override fun getItemCount(): Int {
@@ -36,11 +36,17 @@ class ArtistsAdapter: RecyclerView.Adapter<ArtistsAdapter.ViewHolder>() {
         }
     }
 
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        fun bindArtist(artist: Artist){
+        fun bindArtist(artist: Artist,position: Int,listener:OnArtistClickListener?){
             itemView.item_image.loadUrl(artist.image[2].imgurl)
             itemView.item_name.text = artist.name
+            itemView.setOnClickListener {
+                listener?.clickArtist(artist,position)
+            }
         }
+    }
+
+    interface OnArtistClickListener{
+        fun clickArtist(artist: Artist, position: Int)
     }
 }
