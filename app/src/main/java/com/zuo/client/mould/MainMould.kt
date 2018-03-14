@@ -13,8 +13,8 @@ import com.zuo.client.httpService.NetService
 class MainMould{
 
     fun requestSmilar(result:ClientResponse<LastFmBean>) {
-        NetService.requestNet({ service ->
-            service.requestSimilar(App.instance().getString(R.string.coldplayMbid))
-        },result)
+//        NetService.requestNet({ service ->
+//            service.requestSimilar(App.instance().getString(R.string.coldplayMbid))
+//        },result)
     }
 }

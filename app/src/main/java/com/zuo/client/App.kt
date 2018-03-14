@@ -2,6 +2,7 @@ package com.zuo.client
 
 import android.annotation.SuppressLint
 import android.app.Application
+import com.zuo.client.di.ApplicationComponent
 
 /**
  * Created by dongdong on 2018/3/11.
@@ -9,13 +10,15 @@ import android.app.Application
 class App:Application(){
 
     companion object {
-        @SuppressLint("StaticFieldLeak")
-        private var instance:Application? = null
-        fun instance() = instance!!
+        lateinit var instance:ApplicationComponent
     }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        initializeDagger()
+    }
+
+    private fun initializeDagger() {
+
     }
 }
