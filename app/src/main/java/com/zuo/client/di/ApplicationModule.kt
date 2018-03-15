@@ -12,11 +12,14 @@ import javax.inject.Singleton
  * 时间：2018/3/14 15:14
  */
 @Module
-class AppModule(private val app: App){
+class ApplicationModule(private val app: App){
 
     @Provides @Singleton
     fun provideApplication():App = app
 
     @Provides @Singleton @AppQualifier
     fun provideApplicationContext():Context = app
+
+    @Provides
+    fun provideHello() = "HelloWorld"
 }

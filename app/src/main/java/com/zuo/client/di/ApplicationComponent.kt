@@ -1,5 +1,6 @@
 package com.zuo.client.di
 
+import com.zuo.client.App
 import com.zuo.client.di.components.MainActivityComponent
 import com.zuo.client.di.moudles.MainActivityModules
 import javax.inject.Singleton
@@ -10,8 +11,7 @@ import dagger.Component
  * 时间：2018/3/14 17:08
  */
 @Singleton
-@Component(modules = [AppModule::class,DataModule::class])
+@Component(modules = [(ApplicationModule::class),(DataModule::class)])
 interface ApplicationComponent{
-
-    fun plus(module: MainActivityModules): MainActivityComponent
+    fun plus(mainModule: MainActivityModules): MainActivityComponent
 }

@@ -7,6 +7,6 @@ interface BasePresenter{
     fun start()
 }
 
-interface BaseView<T>{
-     val presenter:T
+interface BaseView{
+
 }

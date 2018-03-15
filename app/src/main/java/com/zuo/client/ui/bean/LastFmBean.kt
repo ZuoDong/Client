@@ -1,4 +1,4 @@
-package com.zuo.client.bean
+package com.zuo.client.ui.bean
 
 import com.google.gson.annotations.SerializedName
 

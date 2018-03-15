@@ -1,6 +1,6 @@
 package com.zuo.client.httpService
 
-import com.zuo.client.bean.LastFmBean
+import com.zuo.client.ui.bean.LastFmBean
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

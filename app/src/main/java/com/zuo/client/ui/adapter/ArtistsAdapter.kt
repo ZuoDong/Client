@@ -1,10 +1,10 @@
-package com.zuo.client.adapter
+package com.zuo.client.ui.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.zuo.client.R
-import com.zuo.client.bean.Artist
+import com.zuo.client.ui.bean.Artist
 import com.zuo.client.extensions.loadUrl
 import kotlinx.android.synthetic.main.item_artist.view.*
 
