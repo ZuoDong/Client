@@ -38,10 +38,12 @@ class ArtistsAdapter(val listener:OnArtistClickListener?): RecyclerView.Adapter<
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         fun bindArtist(artist: Artist,position: Int,listener:OnArtistClickListener?){
-            itemView.item_image.loadUrl(artist.image[2].imgurl)
-            itemView.item_name.text = artist.name
-            itemView.setOnClickListener {
-                listener?.clickArtist(artist,position)
+            with(itemView){
+                item_image.loadUrl(artist.image[2].imgurl)
+                item_name.text = artist.name
+                setOnClickListener {
+                    listener?.clickArtist(artist,position)
+                }
             }
         }
     }

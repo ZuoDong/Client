@@ -1,4 +1,4 @@
-package com.zuo.client.di.moudles
+package com.zuo.client.di.modules
 
 import com.zuo.client.di.scop.ActivityScope
 import com.zuo.client.httpService.LastfmService

@@ -1,8 +1,7 @@
 package com.zuo.client.di
 
-import com.zuo.client.App
 import com.zuo.client.di.components.MainActivityComponent
-import com.zuo.client.di.moudles.MainActivityModules
+import com.zuo.client.di.modules.MainActivityModules
 import javax.inject.Singleton
 import dagger.Component
 

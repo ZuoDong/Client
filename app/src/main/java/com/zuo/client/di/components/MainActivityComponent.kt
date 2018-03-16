@@ -1,6 +1,6 @@
 package com.zuo.client.di.components
 
-import com.zuo.client.di.moudles.MainActivityModules
+import com.zuo.client.di.modules.MainActivityModules
 import com.zuo.client.di.scop.ActivityScope
 import com.zuo.client.ui.activity.MainActivity
 import dagger.Subcomponent
